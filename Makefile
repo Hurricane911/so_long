@@ -6,7 +6,7 @@ LIBFT = ./libft/libft.a
 LIBFTDIR = ./libft
 MINILIBX_PATH	=	./mlx_linux
 MINILIBX		=	$(MINILIBX_PATH)/libmlx.a
-SRC = src/so_long.c
+SRC = src/*.c
 
 OBJ = $(SRC:%.c=%.o)
 

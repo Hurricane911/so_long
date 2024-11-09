@@ -1,0 +1,2 @@
+printf "%d\n" $((0xff52))
+xev
