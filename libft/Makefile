@@ -5,7 +5,7 @@ CFILES = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_str
 	ft_memcmp.c ft_strnstr.c ft_atoi.c ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c\
     ft_itoa.c ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c\
 	printf/ft_printf.c printf/ft_putchar.c printf/ft_puthexcap.c printf/ft_puthexlow.c printf/ft_putnbr.c printf/ft_putstr.c printf/ft_putunbr.c printf/ft_putptr.c\
-	get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
+	get_next_line.c
 
 OFILES = $(CFILES:.c=.o)
 
@@ -21,7 +21,7 @@ $(NAME): $(OFILES)
 	ar -cr $(OUTN) $(OFILES)
 
 %.o: %.c
-	$(Compiler) $(Flags) -c $< -o $@ -I./ -I./get_next_line
+	$(Compiler) $(Flags) -c $< -o $@ -I./
 
 clean:
 	rm -f $(OFILES)
