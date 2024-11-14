@@ -10,8 +10,8 @@
 #include <X11/X.h>
 #include <X11/keysym.h>
 
-#define IMG_HEIGHT 100
-#define IMG_WIDTH 100
+#define IMG_HEIGHT 50
+#define IMG_WIDTH 50
 
 #define WALL '1'
 #define FLOOR '0'
@@ -32,7 +32,20 @@
 #define KEY_Q 113
 #define KEY_ESC 65307
 
-#define PLAYER_FRONT_XPM "src/ditto2.xpm"
+#define FRONT 1
+#define LEFT 2
+#define RIGHT 3
+#define BACK 4
+
+#define WALL_XPM "assets/sprites/wall.xpm"
+#define FLOOR_XPM "assets/sprites/floor.xpm"
+#define COINS_XPM "assets/sprites/coin-bag.xpm"
+#define PLAYER_FRONT_XPM "assets/sprites/player/front.xpm"
+#define PLAYER_LEFT_XPM "assets/sprites/player/left.xpm"
+#define PLAYER_RIGHT_XPM "assets/sprites/player/right.xpm"
+#define PLAYER_BACK_XPM "assets/sprites/player/back.xpm"
+#define OPEN_EXIT_XPM "assets/sprites/open-exit.xpm"
+#define EXIT_CLOSED_XPM "assets/sprites/exit-closed.xpm"
 
 #define GREEN "\033[0;32m"
 #define RED "\033[1;31m"
@@ -96,14 +109,38 @@ void ft_init_mlx(t_game *game);
 void ft_init_sprites(t_game *game);
 t_image ft_new_sprite(void *mlx, char *path, t_game *game);
 
+// render
+int ft_render_map(t_game *game);
+void ft_render_sprite(t_game *game, t_image sprite, int line, int column);
+void ft_render_player(t_game *game, int y, int x);
+
+// handle input
+int ft_handle_input(int keysym, t_game *game);
+
+// movements
+void ft_print_movements(t_game *game);
+void ft_player_move(t_game *game, int new_y, int new_x, int player_sprite);
+
 // utils
 char *ft_strappend(char **s1, const char *s2);
 
 // error checking
 void ft_check_command_line_arguments(int ac, char **av, t_game *game);
+void ft_check_for_empty_line(char *map, t_game *game);
 int ft_error_msg(char *message, t_game *game);
+void ft_check_map(t_game *game);
+void ft_check_rows(t_game *game);
+void ft_check_columns(t_game *game);
+void ft_count_map_parameters(t_game *game);
+void ft_verify_map_parameters(t_game *game);
 
 // free_memory
 void ft_free_map(t_game *game);
+void ft_free_all_allocated_memory(t_game *game);
+
+// close game
+void ft_destroy_images(t_game *game);
+int ft_victory(t_game *game);
+int ft_close_game(t_game *game);
 
 #endif

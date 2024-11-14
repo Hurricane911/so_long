@@ -2,6 +2,7 @@
 
 void ft_check_command_line_arguments(int ac, char **av, t_game *game);
 void ft_init_map(t_game *game, char *av);
+void ft_check_for_empty_line(char *map, t_game *game);
 
 void ft_check_command_line_arguments(int ac, char **av, t_game *game)
 {
@@ -43,4 +44,36 @@ void ft_init_map(t_game *game, char *av)
 	game->map.full = ft_split(map_temp, '\n');
 	game->map_alloc = true;
 	free(map_temp);
+}
+
+void ft_check_for_empty_line(char *map, t_game *game)
+{
+	int i;
+
+	i = 0;
+	if (map[0] == '\n')
+	{
+		free(map);
+		ft_error_msg("Invalid map.\
+The map have an empty line right at the beginning.",
+					 game);
+	}
+	else if (map[ft_strlen(map) - 1] == '\n')
+	{
+		free(map);
+		ft_error_msg("Invalid map. \
+The map have an empty line at the end.",
+					 game);
+	}
+	while (map[i + 1])
+	{
+		if (map[i] == '\n' && map[i + 1] == '\n')
+		{
+			free(map);
+			ft_error_msg("Invalid map. \
+The map have an empty line at the middle.",
+						 game);
+		}
+		i++;
+	}
 }
