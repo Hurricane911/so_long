@@ -12,10 +12,10 @@ int ft_render_map(t_game *game)
 	int y;
 
 	y = 0;
-	while (y < game->map.columns)
+	while (y < game->map.rows)
 	{
 		x = 0;
-		while (x < game->map.rows)
+		while (x < game->map.columns)
 		{
 			ft_identify_sprite(game, y, x);
 			x++;
