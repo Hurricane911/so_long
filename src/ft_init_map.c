@@ -17,8 +17,11 @@ void ft_check_command_line_arguments(int ac, char **av, t_game *game)
 	if (ac < 2)
 		ft_error_msg("Error\nmap file missing", game);
 	map_parameter_len = ft_strlen(av[1]);
-	if (!ft_strnstr(&av[1][map_parameter_len - 4], ".ber", 4))
-		ft_error_msg("Error\n(.ber only)", game);
+	if (!ft_strnstr(&av[1][map_parameter_len - 4], ".ber", 4) ||
+		av[1][0] == '.' || av[1][map_parameter_len - 5] == '/')
+	{
+		ft_error_msg("Error\nInvalid map file (must be a valid .ber file)", game);
+	}
 }
 
 void ft_init_map(t_game *game, char *av)

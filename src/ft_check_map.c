@@ -9,11 +9,13 @@ void ft_verify_map_parameters(t_game *game);
 
 void ft_check_map(t_game *game)
 {
+
 	check_size(game);
 	ft_check_rows(game);
 	ft_check_columns(game);
 	ft_count_map_parameters(game);
 	ft_verify_map_parameters(game);
+	check_valid_path(game);
 }
 
 void check_size(t_game *game)

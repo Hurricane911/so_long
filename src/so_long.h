@@ -90,6 +90,10 @@ typedef struct s_game
 	void *win_ptr;
 	int movements;
 	int player_sprite;
+	int c_check;
+	int e_check;
+	int c;
+	int e;
 	t_map map;
 	t_bool map_alloc;
 	t_image wall;
@@ -144,5 +148,10 @@ void ft_free_all_allocated_memory(t_game *game);
 void ft_destroy_images(t_game *game);
 int ft_victory(t_game *game);
 int ft_close_game(t_game *game);
+
+void check_valid_path(t_game *game);
+void find_exit(int x, int y, t_game *game);
+void find_collectibles(int x, int y, t_game *game);
+void scan_player(t_game *game);
 
 #endif
