@@ -35,6 +35,6 @@ int ft_error_msg(char *message, t_game *game)
 	if (game->map_alloc == true)
 		ft_free_map(game);
 	free(game);
-	ft_printf(RED "Error\n" GREY "%s\n" RESET, message);
+	ft_printf("%s\n", message);
 	exit(EXIT_FAILURE);
 }

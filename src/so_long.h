@@ -75,6 +75,7 @@ typedef struct s_image
 typedef struct s_map
 {
 	char **full;
+	char **copy;
 	int rows;
 	int columns;
 	int coins;
@@ -133,6 +134,7 @@ void ft_check_rows(t_game *game);
 void ft_check_columns(t_game *game);
 void ft_count_map_parameters(t_game *game);
 void ft_verify_map_parameters(t_game *game);
+void check_size(t_game *game);
 
 // free_memory
 void ft_free_map(t_game *game);

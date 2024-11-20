@@ -11,8 +11,8 @@ void ft_init_vars(t_game *game)
 	game->map.exit = 0;
 	game->map.players = 0;
 	game->movements = 0;
-	game->map.columns = ft_strlen(game->map.full[0]) - 1;
-	game->player_sprite = RIGHT;
+	game->map.columns = ft_strlen(game->map.full[0]);
+	game->player_sprite = FRONT;
 }
 
 void ft_init_mlx(t_game *game)
@@ -21,14 +21,14 @@ void ft_init_mlx(t_game *game)
 	if (game->mlx_ptr == NULL)
 	{
 		free(game->mlx_ptr);
-		ft_error_msg("Couldn't find mlx pointer. Try it using a VNC.", game);
+		ft_error_msg("Error\nNo mlx pointer.", game);
 	}
 	game->win_ptr = mlx_new_window(game->mlx_ptr,
 								   game->map.columns * IMG_WIDTH, game->map.rows * IMG_HEIGHT, "so_long");
 	if (game->win_ptr == NULL)
 	{
 		free(game->mlx_ptr);
-		ft_error_msg("Couldn't create the Window.", game);
+		ft_error_msg("Error\nCouldn't create the Window.", game);
 	}
 }
 
@@ -54,6 +54,6 @@ t_image ft_new_sprite(void *mlx, char *path, t_game *game)
 
 	sprite.xpm_ptr = mlx_xpm_file_to_image(mlx, path, &sprite.x, &sprite.y);
 	if (sprite.xpm_ptr == NULL)
-		ft_error_msg("couldnt find your character, does it exist?", game);
+		ft_error_msg("Error\nNo character", game);
 	return (sprite);
 }
