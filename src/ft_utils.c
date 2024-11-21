@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_utils.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joyim <joyim@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/21 19:09:35 by joyim             #+#    #+#             */
+/*   Updated: 2024/11/21 19:09:35 by joyim            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-char *ft_strappend(char **s1, const char *s2);
+char	*ft_strappend(char **s1, const char *s2);
 
-char *ft_strappend(char **s1, const char *s2)
+char	*ft_strappend(char **s1, const char *s2)
 {
-	char *str;
+	char	*str;
 
 	if (!*s1 || !s2)
 		return (NULL);

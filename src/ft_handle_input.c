@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_handle_input.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joyim <joyim@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/21 17:38:38 by joyim             #+#    #+#             */
+/*   Updated: 2024/11/21 17:38:38 by joyim            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-int ft_handle_input(int keysym, t_game *game);
-void ft_player_move(t_game *game, int new_y, int new_x, int player_sprite);
+int		ft_handle_input(int keysym, t_game *game);
+void	ft_player_move(t_game *game, int new_y, int new_x, int player_sprite);
 
-int ft_handle_input(int keysym, t_game *game)
+int	ft_handle_input(int keysym, t_game *game)
 {
 	if (keysym == KEY_UP || keysym == KEY_W)
 		ft_player_move(game, game->map.player.y - 1, game->map.player.x, BACK);
@@ -18,18 +30,18 @@ int ft_handle_input(int keysym, t_game *game)
 	return (0);
 }
 
-void ft_player_move(t_game *game, int new_y, int new_x, int player_sprite)
+void	ft_player_move(t_game *game, int new_y, int new_x, int player_sprite)
 {
-	int last_x;
-	int last_y;
+	int		last_x;
+	int		last_y;
 
 	game->player_sprite = player_sprite;
-
 	last_x = game->map.player.x;
 	last_y = game->map.player.y;
 	if (game->map.full[new_y][new_x] == MAP_EXIT && game->map.coins == 0)
 		ft_victory(game);
-	else if ((game->map.full[new_y][new_x] == FLOOR) || (game->map.full[new_y][new_x] == COINS))
+	else if ((game->map.full[new_y][new_x] == FLOOR)
+			|| (game->map.full[new_y][new_x] == COINS))
 	{
 		game->map.full[last_y][last_x] = FLOOR;
 		if (game->map.full[new_y][new_x] == COINS)

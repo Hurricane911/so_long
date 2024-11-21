@@ -1,15 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_render_map.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joyim <joyim@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/21 18:10:02 by joyim             #+#    #+#             */
+/*   Updated: 2024/11/21 18:10:02 by joyim            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-int ft_render_map(t_game *game);
-void ft_identify_sprite(t_game *game, int y, int x);
-void ft_render_sprite(t_game *game, t_image sprite, int line, int column);
-void ft_render_player(t_game *game, int y, int x);
-void ft_print_movements(t_game *game);
+int		ft_render_map(t_game *game);
+void	ft_identify_sprite(t_game *game, int y, int x);
+void	ft_render_sprite(t_game *game, t_image sprite, int line, int column);
+void	ft_render_player(t_game *game, int y, int x);
+void	ft_print_movements(t_game *game);
 
-int ft_render_map(t_game *game)
+int	ft_render_map(t_game *game)
 {
-	int x;
-	int y;
+	int		x;
+	int		y;
 
 	y = 0;
 	while (y < game->map.rows)
@@ -26,9 +38,9 @@ int ft_render_map(t_game *game)
 	return (0);
 }
 
-void ft_identify_sprite(t_game *game, int y, int x)
+void	ft_identify_sprite(t_game *game, int y, int x)
 {
-	char parameter;
+	char	parameter;
 
 	parameter = game->map.full[y][x];
 	if (parameter == WALL)
@@ -48,12 +60,13 @@ void ft_identify_sprite(t_game *game, int y, int x)
 		ft_render_player(game, y, x);
 }
 
-void ft_render_sprite(t_game *game, t_image sprite, int line, int column)
+void	ft_render_sprite(t_game *game, t_image sprite, int line, int column)
 {
-	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, sprite.xpm_ptr, column * sprite.x, line * sprite.y);
+	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
+		sprite.xpm_ptr, column * sprite.x, line * sprite.y);
 }
 
-void ft_render_player(t_game *game, int y, int x)
+void	ft_render_player(t_game *game, int y, int x)
 {
 	if (game->player_sprite == FRONT)
 		ft_render_sprite(game, game->player_front, y, x);
@@ -65,10 +78,10 @@ void ft_render_player(t_game *game, int y, int x)
 		ft_render_sprite(game, game->player_back, y, x);
 }
 
-void ft_print_movements(t_game *game)
+void	ft_print_movements(t_game *game)
 {
-	char *movements;
-	char *phrase;
+	char	*movements;
+	char	*phrase;
 
 	movements = ft_itoa(game->movements);
 	write(1, "\r", 1);
@@ -76,10 +89,8 @@ void ft_print_movements(t_game *game)
 	write(1, movements, ft_strlen(movements));
 	write(1, "\x1b[0m", 5);
 	write(1, " Movements ", 11);
-
 	phrase = ft_strjoin("Movements :", movements);
-	mlx_string_put(game->mlx_ptr, game->win_ptr, 40, 20, 99999, phrase);
-
+	mlx_string_put(game->mlx_ptr, game->win_ptr, 40, 20, 0xFFFFFF, phrase);
 	free(movements);
 	free(phrase);
 }

@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_init_game.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joyim <joyim@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/21 18:05:23 by joyim             #+#    #+#             */
+/*   Updated: 2024/11/21 18:05:23 by joyim            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-void ft_init_mlx(t_game *game);
-void ft_init_vars(t_game *game);
-void ft_init_sprites(t_game *game);
-t_image ft_new_sprite(void *mlx, char *path, t_game *game);
+void	ft_init_mlx(t_game *game);
+void	ft_init_vars(t_game *game);
+void	ft_init_sprites(t_game *game);
+t_image	ft_new_sprite(void *mlx, char *path, t_game *game);
 
-void ft_init_vars(t_game *game)
+void	ft_init_vars(t_game *game)
 {
 	game->map.coins = 0;
 	game->map.exit = 0;
@@ -15,7 +27,7 @@ void ft_init_vars(t_game *game)
 	game->player_sprite = FRONT;
 }
 
-void ft_init_mlx(t_game *game)
+void	ft_init_mlx(t_game *game)
 {
 	game->mlx_ptr = mlx_init();
 	if (game->mlx_ptr == NULL)
@@ -24,7 +36,8 @@ void ft_init_mlx(t_game *game)
 		ft_error_msg("Error\nNo mlx pointer.", game);
 	}
 	game->win_ptr = mlx_new_window(game->mlx_ptr,
-								   game->map.columns * IMG_WIDTH, game->map.rows * IMG_HEIGHT, "so_long");
+			game->map.columns * IMG_WIDTH,
+			game->map.rows * IMG_HEIGHT, "so_long");
 	if (game->win_ptr == NULL)
 	{
 		free(game->mlx_ptr);
@@ -32,9 +45,9 @@ void ft_init_mlx(t_game *game)
 	}
 }
 
-void ft_init_sprites(t_game *game)
+void	ft_init_sprites(t_game *game)
 {
-	void *mlx;
+	void	*mlx;
 
 	mlx = game->mlx_ptr;
 	game->wall = ft_new_sprite(mlx, WALL_XPM, game);
@@ -48,9 +61,9 @@ void ft_init_sprites(t_game *game)
 	game->exit_closed = ft_new_sprite(mlx, EXIT_CLOSED_XPM, game);
 }
 
-t_image ft_new_sprite(void *mlx, char *path, t_game *game)
+t_image	ft_new_sprite(void *mlx, char *path, t_game *game)
 {
-	t_image sprite;
+	t_image		sprite;
 
 	sprite.xpm_ptr = mlx_xpm_file_to_image(mlx, path, &sprite.x, &sprite.y);
 	if (sprite.xpm_ptr == NULL)

@@ -6,36 +6,16 @@
 /*   By: joyim <joyim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 17:09:10 by joyim             #+#    #+#             */
-/*   Updated: 2024/07/30 16:52:36 by joyim            ###   ########.fr       */
+/*   Updated: 2024/11/21 19:38:17 by joyim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// static char *ft_strchr(const char *s, int c)
-// {
-// 	size_t i;
-
-// 	i = 0;
-// 	while (s[i] != '\0')
-// 	{
-// 		if (s[i] == (unsigned char)c)
-// 		{
-// 			return ((char *)&s[i]);
-// 		}
-// 		i++;
-// 	}
-// 	if (c == '\0')
-// 	{
-// 		return ((char *)&s[i]);
-// 	}
-// 	return (NULL);
-// }
-
-static char *function(int fd, char *buf, char *backup)
+static char	*function(int fd, char *buf, char *backup)
 {
-	int read_line;
-	char *char_temp;
+	int		read_line;
+	char	*char_temp;
 
 	read_line = 1;
 	while (read_line != '\0')
@@ -44,7 +24,7 @@ static char *function(int fd, char *buf, char *backup)
 		if (read_line <= -1)
 			return (NULL);
 		else if (read_line == 0)
-			break;
+			break ;
 		buf[read_line] = '\0';
 		if (!backup)
 			backup = ft_strdup("");
@@ -53,15 +33,15 @@ static char *function(int fd, char *buf, char *backup)
 		free(char_temp);
 		char_temp = NULL;
 		if (ft_strchr(backup, '\n'))
-			break;
+			break ;
 	}
 	return (backup);
 }
 
-static char *extract(char *line)
+static char	*extract(char *line)
 {
-	int count;
-	char *backup;
+	int		count;
+	char	*backup;
 
 	count = 0;
 	while (line[count] != '\0' && line[count] != '\n')
@@ -78,11 +58,11 @@ static char *extract(char *line)
 	return (backup);
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-	char *line;
-	char *buf;
-	static char *backup;
+	char		*line;
+	char		*buf;
+	static char	*backup;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);

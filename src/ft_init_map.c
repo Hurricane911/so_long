@@ -1,17 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_init_map.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joyim <joyim@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/21 18:11:00 by joyim             #+#    #+#             */
+/*   Updated: 2024/11/21 18:11:00 by joyim            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
-#include <stdio.h>
-#include <string.h>
 
-void ft_check_command_line_arguments(int ac, char **av, t_game *game);
-void ft_init_map(t_game *game, char *av);
-void ft_check_for_empty_line(char *map, t_game *game);
+void	ft_check_command_line_arguments(int ac, char **av, t_game *game);
+void	ft_init_map(t_game *game, char *av);
+void	ft_check_for_empty_line(char *map, t_game *game);
 
-void ft_check_command_line_arguments(int ac, char **av, t_game *game)
+void	ft_check_command_line_arguments(int ac, char **av, t_game *game)
 {
-	int map_parameter_len;
+	int		map_parameter_len;
 
 	game->map_alloc = false;
-
 	if (ac > 2)
 		ft_error_msg("Error\nTwo Arg only", game);
 	if (ac < 2)
@@ -19,43 +28,43 @@ void ft_check_command_line_arguments(int ac, char **av, t_game *game)
 	map_parameter_len = ft_strlen(av[1]);
 	if (!ft_strnstr(&av[1][map_parameter_len - 4], ".ber", 4) ||
 		av[1][0] == '.' || av[1][map_parameter_len - 5] == '/')
-	{
-		ft_error_msg("Error\nInvalid map file (must be a valid .ber file)", game);
-	}
+		ft_error_msg("Error\nInvalid map file \
+		(must be a valid .ber file)", game);
 }
 
-void ft_init_map(t_game *game, char *av)
+void	ft_init_map(t_game *game, char *av)
 {
-	char *map_temp;
-	char *line_temp;
-	int map_fd;
-	char buffer[1];
-	ssize_t bytes_read;
+	char		*map_temp;
+	char		*line_temp;
+	int			map_fd;
+	char		buffer[1];
+	ssize_t		bytes_read;
+	int			i;
+	int			j;
+
 	printf("Opening file: %s\n", av);
 	map_fd = open(av, O_RDONLY);
 	if (map_fd == -1)
 		ft_error_msg("Error\nFile does not exist", game);
-
 	bytes_read = read(map_fd, buffer, 1);
 	if (bytes_read == 0)
 		ft_error_msg("Error\nMap is empty", game);
 	lseek(map_fd, 0, SEEK_SET);
-
 	map_temp = ft_strdup("");
-	game->map.rows = 0; // init map row
+	game->map.rows = 0;
 	game->map.columns = 0;
-
 	while (true)
 	{
-		line_temp = get_next_line(map_fd); // init buffer
+		line_temp = get_next_line(map_fd);
 		if (line_temp == NULL)
-			break;
-		int i = 0, j = 0;
+			break ;
+		i = 0;
+		j = 0;
 		while (line_temp[i] != '\0')
 		{
 			if (line_temp[i] != '\r')
 			{
-				line_temp[j] = line_temp[i];
+				line_temp [j] = line_temp [i];
 				j++;
 			}
 			i++;
@@ -66,18 +75,16 @@ void ft_init_map(t_game *game, char *av)
 		game->map.rows++;
 	}
 	close(map_fd);
-	// printf("Map contents:\n%s\n", map_temp);
 	ft_check_for_empty_line(map_temp, game);
 	game->map.full = ft_split(map_temp, '\n');
 	game->map.copy = ft_split(map_temp, '\n');
-
 	game->map_alloc = true;
 	free(map_temp);
 }
 
-void ft_check_for_empty_line(char *map, t_game *game)
+void	ft_check_for_empty_line(char *map, t_game *game)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	if (map[0] == '\0')

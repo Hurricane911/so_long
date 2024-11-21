@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_free_memory.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joyim <joyim@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/21 17:37:42 by joyim             #+#    #+#             */
+/*   Updated: 2024/11/21 17:37:42 by joyim            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-void ft_free_all_allocated_memory(t_game *game);
-void ft_destroy_images(t_game *game);
-void ft_free_map(t_game *game);
+void	ft_free_all_allocated_memory(t_game *game);
+void	ft_destroy_images(t_game *game);
+void	ft_free_map(t_game *game);
 
-void ft_free_all_allocated_memory(t_game *game)
+void	ft_free_all_allocated_memory(t_game *game)
 {
 	ft_destroy_images(game);
 	ft_free_map(game);
@@ -14,7 +26,7 @@ void ft_free_all_allocated_memory(t_game *game)
 	free(game);
 }
 
-void ft_destroy_images(t_game *game)
+void	ft_destroy_images(t_game *game)
 {
 	mlx_destroy_image(game->mlx_ptr, game->wall.xpm_ptr);
 	mlx_destroy_image(game->mlx_ptr, game->floor.xpm_ptr);
@@ -27,9 +39,9 @@ void ft_destroy_images(t_game *game)
 	mlx_destroy_image(game->mlx_ptr, game->open_exit.xpm_ptr);
 }
 
-void ft_free_map(t_game *game)
+void	ft_free_map(t_game *game)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	if (game->map.full)
