@@ -29,10 +29,26 @@ void ft_destroy_images(t_game *game)
 
 void ft_free_map(t_game *game)
 {
-	int string;
+	int i;
 
-	string = 0;
-	while (string < game->map.rows)
-		free(game->map.full[string++]);
-	free(game->map.full);
+	i = 0;
+	if (game->map.full)
+	{
+		while (game->map.full[i])
+		{
+			free(game->map.full[i]);
+			i++;
+		}
+		free(game->map.full);
+	}
+	i = 0;
+	if (game->map.copy[i])
+	{
+		while (game->map.copy[i])
+		{
+			free(game->map.copy[i]);
+			i++;
+		}
+		free(game->map.copy);
+	}
 }
