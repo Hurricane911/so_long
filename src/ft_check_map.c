@@ -51,11 +51,11 @@ void	ft_check_columns(t_game *game)
 	while (i < game->map.rows)
 	{
 		if (game->map.full[i][0] != WALL)
-			ft_error_msg("Error\nInvalid Map. \
-						Wall missing first column.", game);
+			ft_error_msg("Error\nInvalid Map. "
+				"Wall missing first column.", game);
 		else if (game->map.full[i][game->map.columns - 1] != WALL)
-			ft_error_msg("Error\nInvalid Map. \
-						Wall missing last column.", game);
+			ft_error_msg("Error\nInvalid Map. "
+				"Wall missing last column.", game);
 		i++;
 	}
 }
@@ -68,13 +68,10 @@ void	ft_check_rows(t_game *game)
 	while (i < game->map.columns)
 	{
 		if (game->map.full[0][i] != WALL)
-			ft_error_msg("Error\nInvalid Map. \
-						Wall missing first row.", game);
+			ft_error_msg("Error\nWall missing first row.", game);
 		else if (game->map.full[game->map.rows - 1][i] != WALL)
-			ft_error_msg("Error\nInvalid Map. \
-						Wall missing last row.", game);
+			ft_error_msg("Error\nInvalid Map. "
+				"Wall missing last row.", game);
 		i++;
 	}
 }
-
-

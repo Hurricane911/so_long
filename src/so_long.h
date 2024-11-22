@@ -16,7 +16,6 @@
 # include "../minilibx/mlx.h"
 # include "../libft/libft.h"
 
-# include <stdio.h>
 # include <fcntl.h>
 # include <stdlib.h>
 # include <X11/X.h>
@@ -131,6 +130,7 @@ void	ft_render_player(t_game *game, int y, int x);
 
 int		ft_handle_input(int keysym, t_game *game);
 
+void	ft_print_file(char *av);
 void	ft_print_movements(t_game *game);
 void	ft_player_move(t_game *game, int new_y, int new_x, int player_sprite);
 
@@ -145,6 +145,12 @@ void	ft_check_columns(t_game *game);
 void	ft_count_map_parameters(t_game *game);
 void	ft_verify_map_parameters(t_game *game);
 void	check_size(t_game *game);
+void	handle_exit_err(t_game *game);
+int		ft_rd_map(t_game *game, char *av);
+void	ft_check_map_case(char *map, t_game *game);
+char	*ft_init_map_true(char map_fd, char *map_temp, t_game *game);
+char	*ft_line_temp(char	*line_temp);
+void	ft_count_map_cell(t_game *game, int x, int y);
 
 void	ft_free_map(t_game *game);
 void	ft_free_all_allocated_memory(t_game *game);

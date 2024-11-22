@@ -28,52 +28,20 @@ void	ft_check_command_line_arguments(int ac, char **av, t_game *game)
 	map_parameter_len = ft_strlen(av[1]);
 	if (!ft_strnstr(&av[1][map_parameter_len - 4], ".ber", 4) ||
 		av[1][0] == '.' || av[1][map_parameter_len - 5] == '/')
-		ft_error_msg("Error\nInvalid map file \
-		(must be a valid .ber file)", game);
+		ft_error_msg("Error\nInvalid map file"
+			"(must be a valid .ber file)", game);
 }
 
 void	ft_init_map(t_game *game, char *av)
 {
 	char		*map_temp;
-	char		*line_temp;
 	int			map_fd;
-	char		buffer[1];
-	ssize_t		bytes_read;
-	int			i;
-	int			j;
 
-	printf("Opening file: %s\n", av);
-	map_fd = open(av, O_RDONLY);
-	if (map_fd == -1)
-		ft_error_msg("Error\nFile does not exist", game);
-	bytes_read = read(map_fd, buffer, 1);
-	if (bytes_read == 0)
-		ft_error_msg("Error\nMap is empty", game);
-	lseek(map_fd, 0, SEEK_SET);
+	map_fd = ft_rd_map(game, av);
 	map_temp = ft_strdup("");
 	game->map.rows = 0;
 	game->map.columns = 0;
-	while (true)
-	{
-		line_temp = get_next_line(map_fd);
-		if (line_temp == NULL)
-			break ;
-		i = 0;
-		j = 0;
-		while (line_temp[i] != '\0')
-		{
-			if (line_temp[i] != '\r')
-			{
-				line_temp [j] = line_temp [i];
-				j++;
-			}
-			i++;
-		}
-		line_temp[j] = '\0';
-		map_temp = ft_strappend(&map_temp, line_temp);
-		free(line_temp);
-		game->map.rows++;
-	}
+	map_temp = ft_init_map_true(map_fd, map_temp, game);
 	close(map_fd);
 	ft_check_for_empty_line(map_temp, game);
 	game->map.full = ft_split(map_temp, '\n');
@@ -87,21 +55,7 @@ void	ft_check_for_empty_line(char *map, t_game *game)
 	int		i;
 
 	i = 0;
-	if (map[0] == '\0')
-	{
-		free(map);
-		ft_error_msg("Error\nMap is Empty", game);
-	}
-	if (map[0] == '\n')
-	{
-		free(map);
-		ft_error_msg("Error\nInvalid map. Map empty line first row.", game);
-	}
-	else if (map[ft_strlen(map) - 1] == '\n')
-	{
-		free(map);
-		ft_error_msg("Error\nInvalid map. Map empty line last row", game);
-	}
+	ft_check_map_case(map, game);
 	while (map[i + 1])
 	{
 		if (map[i] == '\n' && map[i + 1] == '\n')

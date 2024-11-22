@@ -30,4 +30,5 @@ int	main(int ac, char **av)
 	mlx_hook(game->win_ptr, Expose, ExposureMask, ft_render_map, game);
 	mlx_loop(game->mlx_ptr);
 	ft_free_all_allocated_memory(game);
+	ft_print_file(*av);
 }

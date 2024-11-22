@@ -28,3 +28,5 @@ char	*ft_strappend(char **s1, const char *s2)
 	free(*s1);
 	return (str);
 }
+
+// char allocate_map_ver(char *map_temp, line_temp)
