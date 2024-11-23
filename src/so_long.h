@@ -48,15 +48,15 @@
 # define RIGHT 3
 # define BACK 4
 
-# define WALL_XPM "assets/sprites/wall.xpm"
-# define FLOOR_XPM "assets/sprites/floor.xpm"
-# define COINS_XPM "assets/sprites/coin-bag.xpm"
-# define PLAYER_FRONT_XPM "assets/sprites/player/front.xpm"
-# define PLAYER_LEFT_XPM "assets/sprites/player/left.xpm"
-# define PLAYER_RIGHT_XPM "assets/sprites/player/right.xpm"
-# define PLAYER_BACK_XPM "assets/sprites/player/back.xpm"
-# define OPEN_EXIT_XPM "assets/sprites/open-exit.xpm"
-# define EXIT_CLOSED_XPM "assets/sprites/exit-closed.xpm"
+# define WALL_XPM "assets/textures/wall.xpm"
+# define FLOOR_XPM "assets/textures/floor.xpm"
+# define COINS_XPM "assets/textures/coin-bag.xpm"
+# define PLAYER_FRONT_XPM "assets/textures/player/front.xpm"
+# define PLAYER_LEFT_XPM "assets/textures/player/left.xpm"
+# define PLAYER_RIGHT_XPM "assets/textures/player/right.xpm"
+# define PLAYER_BACK_XPM "assets/textures/player/back.xpm"
+# define OPEN_EXIT_XPM "assets/textures/open-exit.xpm"
+# define EXIT_CLOSED_XPM "assets/textures/exit-closed.xpm"
 
 # define GREEN "\033[0;32m"
 # define RED "\033[1;31m"
